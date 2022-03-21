@@ -39,7 +39,6 @@ const sources = [
 function App() {
   return (
     <>
-      
       <MultiPlayer sources={sources} />
     </>
   );
