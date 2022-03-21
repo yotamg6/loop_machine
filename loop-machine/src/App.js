@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import MultiPlayer from "./MultiPlayer";
+import MultiPlayer from "./components/MultiPlayer";
 
 const sources = [
   {
@@ -40,7 +39,7 @@ const sources = [
 function App() {
   return (
     <>
-      {/* <Rows /> */}
+      
       <MultiPlayer sources={sources} />
     </>
   );
