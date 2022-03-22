@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-//lodash - debounce
-let isMouseDown = false;
 
 const UseMultiAudio = (sources) => {
   const [tracks, setTracks] = useState([]);
@@ -57,20 +55,13 @@ const UseMultiAudio = (sources) => {
     setIsPlaying(false);
   };
 
-  const setMouseIsDownState = () => {
-    isMouseDown = !isMouseDown;
-  };
-
   const seek = (e) => {
-    if (isMouseDown) {
-      const clickPosition =
-        (e.pageX - e.target.offsetLeft) / e.target.offsetWidth;
-      const clickTime = clickPosition * duration;
-      setCurrentPosition(clickTime);
-      tracks.forEach((track) => {
-        track.instance.currentTime = clickTime;
-      });
-    }
+    const clickPosition = e.target.value / 100;
+    const clickTime = clickPosition * duration;
+    setCurrentPosition(clickTime);
+    tracks.forEach((track) => {
+      track.instance.currentTime = clickTime;
+    });
   };
 
   const loopAll = () => {
@@ -102,14 +93,8 @@ const UseMultiAudio = (sources) => {
     setTrackMuteState,
     currentPosition,
     duration,
-    setMouseIsDownState,
     seek,
   };
 };
 
 export default UseMultiAudio;
-
-// instance.addEventListener("ended", () => {
-//   console.log("ended");
-//   stopAll();
-// });

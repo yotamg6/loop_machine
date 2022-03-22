@@ -20,7 +20,6 @@ const MultiPlayer = ({ sources }) => {
     setTrackMuteState,
     currentPosition,
     duration,
-    setMouseIsDownState,
     seek,
   } = UseMultiAudio(sources);
   const colors = [
@@ -43,7 +42,6 @@ const MultiPlayer = ({ sources }) => {
         <Controls
           currentPosition={currentPosition}
           duration={duration}
-          setMouseIsDownState={setMouseIsDownState}
           seek={seek}
         />
       </Grid>

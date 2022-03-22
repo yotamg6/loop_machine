@@ -1,25 +1,16 @@
-import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
-// import Slider from "@mui/material/Slider";
+import Slider from "@mui/material/Slider";
 
-const Controls = ({ currentPosition, duration, setMouseIsDownState, seek }) => {
+const Controls = ({ currentPosition, duration, seek }) => {
   return (
     <>
-      <Box
-        sx={{ width: "80%" }}
-        onMouseDown={setMouseIsDownState}
-        onMouseMove={seek}
-        onMouseUp={setMouseIsDownState}
-      >
-        <LinearProgress
-          variant="determinate"
-          style={{ height: "40px", cursor: "pointer" }}
+      <Box sx={{ width: "80%" }}>
+        <Slider
           value={(currentPosition / duration) * 100}
-        />
+          onChange={seek}
+        ></Slider>
       </Box>
     </>
   );
 };
 export default Controls;
-
-

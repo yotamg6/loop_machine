@@ -3,7 +3,7 @@ import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+
 import Box from "@mui/material/Box";
 
 const Track = ({ track: { title, isMuted }, index, onMutePress, style }) => {
@@ -18,7 +18,6 @@ const Track = ({ track: { title, isMuted }, index, onMutePress, style }) => {
     >
       <Box sx={{ m: 1 }}>
         <CardContent>
-         
           <p className="trackTitle">Track: {title}</p>
         </CardContent>
         <Box>
@@ -46,5 +45,3 @@ const Track = ({ track: { title, isMuted }, index, onMutePress, style }) => {
 };
 
 export default Track;
-
-
