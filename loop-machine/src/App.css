@@ -37,19 +37,19 @@
   }
 }
 
-.controls {
-  width: 80px;
-  float: left;
+body {
+  background: url("music-cassette-bg.jpeg") no-repeat center center fixed;
 }
 
-.progress {
-  margin-left: 80px;
-  border: 1px solid black;
-  cursor: pointer;
+.headline {
+  font-family: "Bangers", cursive;
+  font-size: 40px;
+  letter-spacing: 2px;
 }
-
-.bar {
-  height: 50px;
-  background-color: green;
-  width: 0px;
+.trackTitle {
+  height: 1px;
+  margin-top: 0;
+  font-family: "Caveat", cursive;
+  font-size: 30px;
+  font-weight: bold;
 }

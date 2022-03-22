@@ -10,20 +10,16 @@ const Track = ({ track: { title, isMuted }, index, onMutePress, style }) => {
   return (
     <Card
       sx={{
-        // display: "flex",
         backgroundColor: style,
-        // alignItems: "center",
-        // width: "40%",
-        // height: "15%",
-        m: 1,
+        width: "40%",
+        height: "20%",
+        m: 2,
       }}
     >
-      {/* <Box sx={{ display: "flex", flexDirection: "column" }}> */}
       <Box sx={{ m: 1 }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h5">
-            Track: {title}
-          </Typography>
+        <CardContent>
+         
+          <p className="trackTitle">Track: {title}</p>
         </CardContent>
         <Box>
           {isMuted ? (
@@ -51,11 +47,4 @@ const Track = ({ track: { title, isMuted }, index, onMutePress, style }) => {
 
 export default Track;
 
-{
-  /* <div style={style}>
-<p>{`Track: ${title} -- isMuted ${isMuted}`}</p>
-<button onClick={() => onMutePress(index)}>
-  {isMuted ? "Unmute" : "Mute"}
-</button>
-</div> */
-}
+

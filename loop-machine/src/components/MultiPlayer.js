@@ -30,25 +30,28 @@ const MultiPlayer = ({ sources }) => {
     "#FF5733",
     "#C70039",
     "#900C3F",
-    "#581845",
+    "#4BE06F",
     "#4B60E0",
   ];
   return (
     <>
-      <Controls
-        currentPosition={currentPosition}
-        duration={duration}
-        setMouseIsDownState={setMouseIsDownState}
-        seek={seek}
-      />
+      <Grid container justifyContent="center" sx={{ m: 1 }}>
+        <h1 className="headline"> LOOP MACHINE</h1>
+      </Grid>
+
+      <Grid container justifyContent="center" sx={{ m: 1 }}>
+        <Controls
+          currentPosition={currentPosition}
+          duration={duration}
+          setMouseIsDownState={setMouseIsDownState}
+          seek={seek}
+        />
+      </Grid>
       <Grid
-        // container
-        // direction="column"
-        alignItems="center"
-        justifyContent="center"
-        // style={{ height: "80vh" }}
+        container
+        justifyContent="space-around"
+        style={{ height: "70vh" }}
         cols={2}
-        rowHeight={164}
       >
         {tracks.map((t, i) => (
           <Track
@@ -59,38 +62,49 @@ const MultiPlayer = ({ sources }) => {
             style={{ backgroundColor: `${colors[i]}` }}
           />
         ))}
+        <Box sx={{ m: 1 }}>
+          <Button
+            style={{ margin: "1px" }}
+            variant="contained"
+            onClick={stopAll}
+            startIcon={<StopCircleIcon />}
+          >
+            Stop all tracks
+          </Button>
+
+          <Button
+            style={{ margin: "1px" }}
+            variant="contained"
+            color="secondary"
+            onClick={playAll}
+            startIcon={<PlayCircleIcon />}
+          >
+            Play all tracks
+          </Button>
+
+          {isLoop ? (
+            <Button
+              style={{ margin: "1px" }}
+              variant="contained"
+              onClick={loopAll}
+              startIcon={<DoDisturbAltOutlinedIcon />}
+            >
+              Unloop
+            </Button>
+          ) : (
+            <Button
+              style={{ margin: "1px" }}
+              variant="contained"
+              onClick={loopAll}
+              startIcon={<LoopIcon />}
+            >
+              Loop all tracks
+            </Button>
+          )}
+        </Box>
       </Grid>
-      <Box>
-        <Button startIcon={<PlayCircleIcon />} onClick={playAll}>
-          Play all tracks
-        </Button>
-        <Button startIcon={<StopCircleIcon />} onClick={stopAll}>
-          Stop all tracks
-        </Button>
-        {isLoop ? (
-          <Button startIcon={<DoDisturbAltOutlinedIcon />} onClick={loopAll}>
-            Unloop
-          </Button>
-        ) : (
-          <Button startIcon={<LoopIcon />} onClick={loopAll}>
-            Loop all tracks
-          </Button>
-        )}
-      </Box>
     </>
   );
 };
 
 export default MultiPlayer;
-
-{
-  /* <div>
-        <button onClick={playAll}>Play all tracks</button>
-      </div>
-      <div>
-        <button onClick={stopAll}>Stop all tracks</button>
-      </div>
-      <div>
-        <button onClick={loopAll}>{isLoop ? "UnLoop" : "Loop All"} </button>
-      </div> */
-}

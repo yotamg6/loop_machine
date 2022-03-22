@@ -6,7 +6,7 @@ const Controls = ({ currentPosition, duration, setMouseIsDownState, seek }) => {
   return (
     <>
       <Box
-        sx={{ width: "100%" }}
+        sx={{ width: "80%" }}
         onMouseDown={setMouseIsDownState}
         onMouseMove={seek}
         onMouseUp={setMouseIsDownState}
@@ -22,18 +22,4 @@ const Controls = ({ currentPosition, duration, setMouseIsDownState, seek }) => {
 };
 export default Controls;
 
-{
-  /* <div
-        className="progress"
-        onMouseDown={setMouseIsDownState}
-        onMouseMove={seek}
-        onMouseUp={setMouseIsDownState}
-      >
-        <div
-          className="bar"
-          style={{
-            width: `${(currentPosition / duration) * 100}%`,
-          }}
-        ></div>
-      </div> */
-}
+
