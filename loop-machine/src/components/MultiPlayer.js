@@ -1,7 +1,7 @@
 import React from "react";
 import Track from "./Track";
 import Controls from "./Controls";
-import UseMultiAudio from "./UseMultiAudio";
+import useMultiAudio from "./useMultiAudio";
 
 import { Grid } from "@mui/material";
 import { Button, Box } from "@mui/material/";
@@ -21,7 +21,7 @@ const MultiPlayer = ({ sources }) => {
     currentPosition,
     duration,
     seek,
-  } = UseMultiAudio(sources);
+  } = useMultiAudio(sources);
   const colors = [
     "#8D7B9C",
     "#DAF7A6",

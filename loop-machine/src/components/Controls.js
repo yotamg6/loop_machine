@@ -5,10 +5,14 @@ const Controls = ({ currentPosition, duration, seek }) => {
   return (
     <>
       <Box sx={{ width: "80%" }}>
-        <Slider
-          value={(currentPosition / duration) * 100}
-          onChange={seek}
-        ></Slider>
+        {duration ? (
+          <Slider
+            value={(currentPosition / duration) * 100}
+            onChange={seek}
+          ></Slider>
+        ) : (
+          <Slider value={0} onChange={seek}></Slider>
+        )}
       </Box>
     </>
   );

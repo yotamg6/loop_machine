@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
-const UseMultiAudio = (sources) => {
+let interval;
+const useMultiAudio = (sources) => {
   const [tracks, setTracks] = useState([]);
   const [currentPosition, setCurrentPosition] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -28,14 +28,14 @@ const UseMultiAudio = (sources) => {
   }, [sources, tracks]);
 
   useEffect(() => {
-    const setPosition = () => {
-      if (isPlaying) {
-        setCurrentPosition(tracks[0].instance.currentTime);
-      } else {
-        clearInterval(interval);
-      }
-    };
-    const interval = setInterval(setPosition, 100);
+    if (isPlaying) {
+      interval = setInterval(
+        () => setCurrentPosition(tracks[0].instance.currentTime),
+        100
+      );
+    } else {
+      clearInterval(interval);
+    }
   }, [isPlaying]);
 
   const playAll = async () => {
@@ -51,6 +51,7 @@ const UseMultiAudio = (sources) => {
     tracks.forEach((track) => {
       track.instance.pause();
       track.instance.currentTime = 0;
+      setCurrentPosition(0);
     });
     setIsPlaying(false);
   };
@@ -97,4 +98,4 @@ const UseMultiAudio = (sources) => {
   };
 };
 
-export default UseMultiAudio;
+export default useMultiAudio;
