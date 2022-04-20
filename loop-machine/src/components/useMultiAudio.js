@@ -50,7 +50,7 @@ const useMultiAudio = (sources) => {
 
   useEffect(() => {
     if (tracks.length) {
-      const filtered = tracks.filter((track) => track.isReady == false);
+      const filtered = tracks.filter((track) => track.isReady === false);
 
       if (!filtered.length) {
         setLoadedTracks(true);
@@ -79,7 +79,7 @@ const useMultiAudio = (sources) => {
       }
     } else {
       toast.error(
-        "Not all files are loaded. Please press the play button again"
+        "Files were not loaded correctly. Please retry or refresh the page"
       );
     }
   };
@@ -104,13 +104,8 @@ const useMultiAudio = (sources) => {
 
   const loopAll = () => {
     tracks.forEach((track) => {
-      if (isLoop) {
-        track.instance.loop = false;
-        setIsLoop(false);
-      } else {
-        track.instance.loop = true;
-        setIsLoop(true);
-      }
+      track.instance.loop = !isLoop;
+      setIsLoop(!isLoop);
     });
   };
 
