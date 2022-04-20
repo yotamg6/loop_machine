@@ -6,6 +6,8 @@ const useMultiAudio = (sources) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [isLoop, setIsLoop] = useState(false);
+  const [loadedTracks, setLoadedTracks] = useState(false);
+  const [areReady, setAreReady] = useState(false);
 
   useEffect(() => {
     if (sources && !tracks.length) {
@@ -21,11 +23,43 @@ const useMultiAudio = (sources) => {
           title,
           instance,
           isMuted: false,
+          isReady: false,
         };
       });
       setTracks(_tracks);
     }
   }, [sources, tracks]);
+
+  useEffect(() => {
+    console.log("duration effect");
+    if (tracks.length) {
+      const nextTracks = [...tracks];
+      nextTracks.forEach((track, index) => {
+        const audio = track.instance;
+        audio.currentTime = 0;
+        audio.addEventListener("canplaythrough", () => {
+          console.log("canPlay");
+
+          track.isReady = true;
+          if (index === nextTracks.length - 1) {
+            console.log("last index in tracks", index);
+            setAreReady(true);
+          }
+        });
+      });
+      setTracks(nextTracks);
+    }
+  }, [duration]);
+
+  useEffect(() => {
+    if (tracks.length) {
+      const filtered = tracks.filter((track) => track.isReady == false);
+      console.log("filtered in areready effect", filtered);
+      if (!filtered.length) {
+        setLoadedTracks(true);
+      }
+    }
+  }, [areReady]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -39,11 +73,15 @@ const useMultiAudio = (sources) => {
   }, [isPlaying]);
 
   const playAll = async () => {
-    try {
-      await Promise.all(tracks.map((track) => track.instance.play()));
-      setIsPlaying(true);
-    } catch (e) {
-      console.log(e);
+    if (loadedTracks) {
+      try {
+        await Promise.all(tracks.map((track) => track.instance.play()));
+        setIsPlaying(true);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log("loadedTracks", loadedTracks);
     }
   };
 
