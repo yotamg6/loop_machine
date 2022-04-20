@@ -1,4 +1,6 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import MultiPlayer from "./components/MultiPlayer";
 
 const sources = [
@@ -39,6 +41,7 @@ const sources = [
 function App() {
   return (
     <>
+      <ToastContainer />
       <MultiPlayer sources={sources} />
     </>
   );

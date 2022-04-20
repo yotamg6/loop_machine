@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 let interval;
 const useMultiAudio = (sources) => {
   const [tracks, setTracks] = useState([]);
@@ -31,18 +32,14 @@ const useMultiAudio = (sources) => {
   }, [sources, tracks]);
 
   useEffect(() => {
-    console.log("duration effect");
     if (tracks.length) {
       const nextTracks = [...tracks];
       nextTracks.forEach((track, index) => {
         const audio = track.instance;
         audio.currentTime = 0;
         audio.addEventListener("canplaythrough", () => {
-          console.log("canPlay");
-
           track.isReady = true;
           if (index === nextTracks.length - 1) {
-            console.log("last index in tracks", index);
             setAreReady(true);
           }
         });
@@ -54,7 +51,7 @@ const useMultiAudio = (sources) => {
   useEffect(() => {
     if (tracks.length) {
       const filtered = tracks.filter((track) => track.isReady == false);
-      console.log("filtered in areready effect", filtered);
+
       if (!filtered.length) {
         setLoadedTracks(true);
       }
@@ -81,7 +78,9 @@ const useMultiAudio = (sources) => {
         console.log(e);
       }
     } else {
-      console.log("loadedTracks", loadedTracks);
+      toast.error(
+        "Not all files are loaded. Please press the play button again"
+      );
     }
   };
 
